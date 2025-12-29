@@ -1,0 +1,139 @@
+/**
+ * Global styles for SecurePress Admin
+ * Using Tailwind CSS and DaisyUI for modern, themable UI
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-base-200;
+  }
+}
+
+@layer components {
+  /* Custom component styles can go here */
+  .page-container {
+    @apply min-h-screen;
+  }
+  
+  .content-wrapper {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+  }
+  
+  .card-elevated {
+    @apply card bg-base-100 shadow-xl;
+  }
+  
+  .form-section {
+    @apply space-y-4;
+  }
+  
+  .input-group-custom {
+    @apply form-control w-full;
+  }
+  
+  .btn-icon {
+    @apply btn btn-square btn-ghost;
+  }
+  
+  .badge-status {
+    @apply badge badge-lg;
+  }
+  
+  .table-custom {
+    @apply table table-zebra w-full;
+  }
+}
+
+@layer utilities {
+  /* Custom utility classes */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Admin-specific overrides */
+.admin-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  @apply bg-base-100 border-r border-base-300;
+}
+
+.admin-main {
+  @apply bg-base-200;
+}
+
+@media (max-width: 768px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .admin-sidebar {
+    display: none;
+  }
+}
+
+/* Loading spinner */
+.loading-spinner {
+  @apply loading loading-spinner loading-lg text-primary;
+}
+
+/* Rich text editor styles */
+.rich-editor {
+  @apply min-h-[300px] p-4 border border-base-300 rounded-lg bg-base-100;
+}
+
+.rich-editor:focus {
+  @apply outline-none ring-2 ring-primary ring-opacity-50;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Theme transition */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-base-200;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-base-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-base-content bg-opacity-30;
+}
