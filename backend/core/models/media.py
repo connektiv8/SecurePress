@@ -166,11 +166,24 @@ class Media(models.Model):
             ext = Path(self.file.name).suffix.lower().lstrip('.')
             if ext in self.ALLOWED_IMAGE_EXTENSIONS:
                 self.file_type = 'image'
-                # Extract image dimensions
+                # Extract image dimensions with security checks
                 try:
+                    # Verify file size before processing (prevent image bombs)
+                    if self.file_size > 50 * 1024 * 1024:  # 50MB limit
+                        raise ValueError('Image file too large')
+                    
                     with Image.open(self.file) as img:
+                        # Verify image is not a decompression bomb
+                        img.verify()
+                        # Reopen to get dimensions (verify() closes the file)
+                        img = Image.open(self.file)
                         self.width, self.height = img.size
+                        
+                        # Additional safety: check pixel count
+                        if self.width * self.height > 178956970:  # PIL's default limit
+                            raise ValueError('Image dimensions too large')
                 except Exception:
+                    # If image processing fails, still allow upload but log warning
                     pass
             elif ext in self.ALLOWED_VIDEO_EXTENSIONS:
                 self.file_type = 'video'

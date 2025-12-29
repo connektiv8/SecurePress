@@ -28,6 +28,7 @@ print_error() {
 
 # Function to generate random secret
 generate_secret() {
+    python3 -c "import secrets; print(secrets.token_urlsafe(50))" 2>/dev/null || \
     openssl rand -base64 32 | tr -d "=+/" | cut -c1-50
 }
 

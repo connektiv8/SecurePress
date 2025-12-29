@@ -25,11 +25,13 @@ def get_tokens_for_user(user):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @ratelimit(key='ip', rate='5/m', method='POST')
+@ratelimit(key='user_or_ip', rate='10/m', method='POST')
 def login_view(request):
     """
     User login endpoint.
     
-    Rate limited to 5 attempts per minute per IP address.
+    Rate limited to 5 attempts per minute per IP address
+    and 10 attempts per minute per user/IP combination.
     """
     serializer = LoginSerializer(data=request.data, context={'request': request})
     serializer.is_valid(raise_exception=True)
