@@ -1,0 +1,22 @@
+{
+  "name": "SecureCommerce",
+  "version": "1.0.0",
+  "description": "Advanced e-commerce functionality for SecurePress with multi-channel connectivity and bulk product editing",
+  "author": "SecurePress Team",
+  "license": "MIT",
+  "requires": {
+    "securepress": ">=1.0.0"
+  },
+  "features": [
+    "Product management with variants",
+    "Advanced inventory tracking",
+    "Multi-location inventory",
+    "Order management",
+    "WooCommerce integration",
+    "Shopify integration",
+    "Bulk product editing",
+    "Multi-channel sync",
+    "Advanced API"
+  ],
+  "enabled": false
+}
