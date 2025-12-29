@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'api.apps.ApiConfig',
     'authentication.apps.AuthenticationConfig',
+    'themes.apps.ThemesConfig',
 ]
 
 MIDDLEWARE = [
