@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { login } from '@/services/auth'
+import { useAuth } from '@/contexts/AuthContext'
 
 export default function Login() {
   const navigate = useNavigate()
+  const { login, isLoading: authLoading } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -17,14 +18,16 @@ export default function Login() {
     setLoading(true)
 
     try {
-      await login(formData)
+      await login(formData.email, formData.password)
       navigate('/admin')
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Login failed. Please try again.')
+      setError(err.message || 'Login failed. Please try again.')
     } finally {
       setLoading(false)
     }
   }
+
+  const isSubmitting = loading || authLoading
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 p-4">
@@ -62,7 +65,7 @@ export default function Login() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
-                disabled={loading}
+                disabled={isSubmitting}
               />
             </div>
 
@@ -78,7 +81,7 @@ export default function Login() {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
-                disabled={loading}
+                disabled={isSubmitting}
               />
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
@@ -90,10 +93,10 @@ export default function Login() {
             <div className="form-control mt-6">
               <button
                 type="submit"
-                className={`btn btn-primary w-full ${loading ? 'loading' : ''}`}
-                disabled={loading}
+                className={`btn btn-primary w-full ${isSubmitting ? 'loading' : ''}`}
+                disabled={isSubmitting}
               >
-                {loading ? 'Signing in...' : 'Sign In'}
+                {isSubmitting ? 'Signing in...' : 'Sign In'}
               </button>
             </div>
           </form>
@@ -101,7 +104,7 @@ export default function Login() {
           <div className="divider">Secure Login</div>
 
           <div className="text-center text-sm text-base-content/60">
-            <p>Protected by SecurePress security features</p>
+            <p>Protected by Knox token authentication</p>
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FiHome, FiFileText, FiFile, FiImage, FiUsers, FiSettings, FiLogOut } from 'react-icons/fi'
-import { logout } from '@/services/auth'
-import { useNavigate } from 'react-router-dom'
+import { useAuth } from '@/contexts/AuthContext'
 
 interface SidebarProps {
   children?: React.ReactNode
@@ -10,6 +9,7 @@ interface SidebarProps {
 export default function Sidebar({ children }: SidebarProps) {
   const location = useLocation()
   const navigate = useNavigate()
+  const { logout } = useAuth()
 
   const handleLogout = async () => {
     await logout()
