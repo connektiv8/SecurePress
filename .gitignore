@@ -246,3 +246,6 @@ docker-compose.override.yml
 media/
 staticfiles/
 static_root/
+
+# WordPress folder (reference/plugin source files)
+wordpress/

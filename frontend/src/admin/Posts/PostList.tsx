@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import Sidebar from '@/components/Layout/Sidebar'
-import Header from '@/components/Layout/Header'
-import Footer from '@/components/Layout/Footer'
+import AdminSidebar from '@/components/Layout/AdminSidebar'
 import { FiPlus, FiEdit, FiTrash2, FiEye, FiSearch } from 'react-icons/fi'
 import { getPosts, deletePost } from '@/services/postApi'
 import type { Post } from '@/types'
@@ -53,10 +51,8 @@ export default function PostList() {
   }
 
   return (
-    <Sidebar>
-      <Header title="Posts" />
-      
-      <div className="content-wrapper">
+    <AdminSidebar>
+      <div className="p-6">
         {/* Header with actions */}
         <div className="flex justify-between items-center mb-6">
           <div>
@@ -74,18 +70,16 @@ export default function PostList() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Search */}
               <div className="form-control">
-                <div className="input-group">
+                <label className="input input-bordered flex items-center gap-2">
+                  <FiSearch />
                   <input
                     type="text"
                     placeholder="Search posts..."
-                    className="input input-bordered w-full"
+                    className="grow"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <button className="btn btn-square">
-                    <FiSearch />
-                  </button>
-                </div>
+                </label>
               </div>
 
               {/* Status filter */}
@@ -245,8 +239,6 @@ export default function PostList() {
           </div>
         </div>
       </div>
-
-      <Footer />
-    </Sidebar>
+    </AdminSidebar>
   )
 }

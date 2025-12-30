@@ -8,8 +8,22 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-base-200;
+  /* Ensure all elements respect theme colors */
+  input::placeholder,
+  textarea::placeholder {
+    color: oklch(var(--bc) / 0.4);
+  }
+  
+  /* Override autofill background colors */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: oklch(var(--bc) / 1);
+    -webkit-box-shadow: 0 0 0px 1000px oklch(var(--b1) / 1) inset;
+    transition: background-color 5000s ease-in-out 0s;
   }
 }
 
@@ -23,28 +37,13 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
   }
   
-  .card-elevated {
-    @apply card bg-base-100 shadow-xl;
-  }
-  
   .form-section {
     @apply space-y-4;
   }
   
-  .input-group-custom {
-    @apply form-control w-full;
-  }
-  
-  .btn-icon {
-    @apply btn btn-square btn-ghost;
-  }
-  
-  .badge-status {
-    @apply badge badge-lg;
-  }
-  
-  .table-custom {
-    @apply table table-zebra w-full;
+  /* Admin card styling with primary border */
+  .card {
+    border: 1px solid oklch(var(--p) / 0.3);
   }
 }
 
@@ -67,14 +66,6 @@
   min-height: 100vh;
 }
 
-.admin-sidebar {
-  @apply bg-base-100 border-r border-base-300;
-}
-
-.admin-main {
-  @apply bg-base-200;
-}
-
 @media (max-width: 768px) {
   .admin-layout {
     grid-template-columns: 1fr;
@@ -83,20 +74,6 @@
   .admin-sidebar {
     display: none;
   }
-}
-
-/* Loading spinner */
-.loading-spinner {
-  @apply loading loading-spinner loading-lg text-primary;
-}
-
-/* Rich text editor styles */
-.rich-editor {
-  @apply min-h-[300px] p-4 border border-base-300 rounded-lg bg-base-100;
-}
-
-.rich-editor:focus {
-  @apply outline-none ring-2 ring-primary ring-opacity-50;
 }
 
 /* Animation utilities */
@@ -127,13 +104,15 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-base-200;
+  background-color: hsl(var(--b2));
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-base-300 rounded-full;
+  background-color: hsl(var(--b3));
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-base-content bg-opacity-30;
+  background-color: hsl(var(--bc) / 0.3);
 }
+

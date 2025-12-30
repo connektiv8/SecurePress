@@ -1,10 +1,9 @@
-import Sidebar from '@/components/Layout/Sidebar'
+import AdminSidebar from '@/components/Layout/AdminSidebar'
 import Header from '@/components/Layout/Header'
-import Footer from '@/components/Layout/Footer'
 
 export default function PageEditor() {
   return (
-    <Sidebar>
+    <AdminSidebar>
       <Header title="Edit Page" />
       <div className="content-wrapper">
         <div className="card bg-base-100 shadow-xl">
@@ -14,7 +13,6 @@ export default function PageEditor() {
           </div>
         </div>
       </div>
-      <Footer />
-    </Sidebar>
+    </AdminSidebar>
   )
 }

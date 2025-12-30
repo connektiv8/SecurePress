@@ -177,7 +177,6 @@ REST_KNOX = {
     'AUTO_REFRESH': True,
     'MIN_REFRESH_INTERVAL': 60,
 }
-}
 
 # CORS Configuration
 CORS_ALLOWED_ORIGINS = os.getenv(
@@ -263,12 +262,6 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-        'file': {
-            'level': 'WARNING',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'django.log',
-            'formatter': 'verbose',
-        },
     },
     'loggers': {
         'django': {
@@ -277,7 +270,7 @@ LOGGING = {
             'propagate': False,
         },
         'django.security': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'WARNING',
             'propagate': False,
         },

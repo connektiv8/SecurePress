@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation } from '@tanstack/react-query'
-import Sidebar from '@/components/Layout/Sidebar'
+import AdminSidebar from '@/components/Layout/AdminSidebar'
 import Header from '@/components/Layout/Header'
-import Footer from '@/components/Layout/Footer'
 import { FiSave, FiX } from 'react-icons/fi'
 import { getPost, createPost, updatePost } from '@/services/postApi'
 import type { CreatePostData } from '@/types'
@@ -87,26 +86,23 @@ export default function PostEditor() {
 
   if (isEditMode && isLoading) {
     return (
-      <Sidebar>
+      <AdminSidebar>
         <Header title="Loading..." />
         <div className="content-wrapper">
           <div className="flex justify-center items-center min-h-[400px]">
             <span className="loading loading-spinner loading-lg text-primary"></span>
           </div>
         </div>
-        <Footer />
-      </Sidebar>
+      </AdminSidebar>
     )
   }
 
   return (
-    <Sidebar>
-      <Header title={isEditMode ? 'Edit Post' : 'New Post'} />
-      
-      <div className="content-wrapper">
-        <form onSubmit={handleSubmit}>
+    <AdminSidebar>
+      <div className="h-full flex flex-col overflow-hidden">
+        <form onSubmit={handleSubmit} className="flex-1 flex flex-col overflow-hidden">
           {/* Header with actions */}
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center px-8 py-6 bg-base-100 flex-shrink-0">
             <div>
               <h1 className="text-3xl font-bold">{isEditMode ? 'Edit Post' : 'Create New Post'}</h1>
               <p className="text-base-content/70">Fill in the details below</p>
@@ -130,9 +126,9 @@ export default function PostEditor() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Main content */}
-            <div className="lg:col-span-2 space-y-6">
+          <div className="flex-1 flex overflow-hidden">
+            {/* Main content - wider area */}
+            <div className="flex-1 overflow-y-auto p-8 space-y-6 bg-base-200">
               {/* Title */}
               <div className="card bg-base-100 shadow-xl">
                 <div className="card-body">
@@ -181,7 +177,7 @@ export default function PostEditor() {
                     </label>
                     <textarea
                       placeholder="Write your post content here..."
-                      className={`textarea textarea-bordered h-64 ${errors.content ? 'textarea-error' : ''}`}
+                      className={`textarea textarea-bordered h-96 ${errors.content ? 'textarea-error' : ''}`}
                       value={formData.content}
                       onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                       required
@@ -246,8 +242,8 @@ export default function PostEditor() {
               </div>
             </div>
 
-            {/* Sidebar */}
-            <div className="space-y-6">
+            {/* Right Sidebar - narrower, fixed width */}
+            <div className="w-96 p-6 space-y-6 bg-base-100 overflow-hidden">
               {/* Publish */}
               <div className="card bg-base-100 shadow-xl">
                 <div className="card-body">
@@ -306,8 +302,6 @@ export default function PostEditor() {
           </div>
         </form>
       </div>
-
-      <Footer />
-    </Sidebar>
+    </AdminSidebar>
   )
 }

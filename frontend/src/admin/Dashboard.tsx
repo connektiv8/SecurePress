@@ -1,6 +1,5 @@
-import Sidebar from '@/components/Layout/Sidebar'
+import AdminSidebar from '@/components/Layout/AdminSidebar'
 import Header from '@/components/Layout/Header'
-import Footer from '@/components/Layout/Footer'
 import { FiFileText, FiFile, FiImage, FiUsers, FiTrendingUp, FiActivity } from 'react-icons/fi'
 
 export default function Dashboard() {
@@ -18,7 +17,7 @@ export default function Dashboard() {
   ]
 
   return (
-    <Sidebar>
+    <AdminSidebar>
       <Header title="Dashboard" />
       
       <div className="content-wrapper">
@@ -143,8 +142,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-
-      <Footer />
-    </Sidebar>
+    </AdminSidebar>
   )
 }

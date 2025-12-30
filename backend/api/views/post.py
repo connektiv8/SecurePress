@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
 from api.permissions import IsAuthorOrReadOnly
-from api.serializers import CategorySerializer, PostListSerializer, PostSerializer, TagSerializer
+from api.serializers import CategorySerializer, PostSerializer, TagSerializer
 from core.models import Category, Post, Tag
 
 
@@ -29,12 +29,6 @@ class PostViewSet(viewsets.ModelViewSet):
     ordering_fields = ['created_at', 'published_at', 'view_count', 'title']
     ordering = ['-published_at']
     lookup_field = 'slug'
-    
-    def get_serializer_class(self):
-        """Use list serializer for list action."""
-        if self.action == 'list':
-            return PostListSerializer
-        return PostSerializer
     
     def get_queryset(self):
         """Filter published posts for non-authenticated users."""

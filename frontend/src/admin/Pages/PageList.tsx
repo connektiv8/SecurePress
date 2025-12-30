@@ -1,10 +1,9 @@
-import Sidebar from '@/components/Layout/Sidebar'
+import AdminSidebar from '@/components/Layout/AdminSidebar'
 import Header from '@/components/Layout/Header'
-import Footer from '@/components/Layout/Footer'
 
 export default function PageList() {
   return (
-    <Sidebar>
+    <AdminSidebar>
       <Header title="Pages" />
       <div className="content-wrapper">
         <div className="card bg-base-100 shadow-xl">
@@ -15,7 +14,6 @@ export default function PageList() {
           </div>
         </div>
       </div>
-      <Footer />
-    </Sidebar>
+    </AdminSidebar>
   )
 }
